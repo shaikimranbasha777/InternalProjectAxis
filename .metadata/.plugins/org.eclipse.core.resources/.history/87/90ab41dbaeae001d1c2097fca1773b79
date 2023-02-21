@@ -1,0 +1,23 @@
+package com.axis.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.axis.entity.Customer;
+import com.axis.repository.CustomerRepository;
+
+@Service
+public class CustomerServiceImple implements CustomerService {
+
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	
+	
+	@Override
+	public String generatePassword(Customer customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

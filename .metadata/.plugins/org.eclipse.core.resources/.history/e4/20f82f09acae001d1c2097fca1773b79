@@ -1,0 +1,5 @@
+package com.axis.entity;
+
+public class Customer {
+
+}

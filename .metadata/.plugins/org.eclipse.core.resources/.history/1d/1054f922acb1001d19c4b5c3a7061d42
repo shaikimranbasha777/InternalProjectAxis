@@ -1,0 +1,9 @@
+package com.axis.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.axis.entity.UserDetails;
+
+public interface UserRepository extends JpaRepository<UserDetails, Integer>{
+
+}

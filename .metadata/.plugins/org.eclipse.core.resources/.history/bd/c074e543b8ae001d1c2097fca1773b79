@@ -1,0 +1,54 @@
+package com.axis.entity;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+@Document(collection = "password_details")
+public class Alphabet {
+	
+	@MongoId
+	private int id;
+	private List<String> passwords;
+	
+	
+	public static final String UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static final String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+	public static final String NUMBERS = "1234567890";
+	public static final String SYMBOLS = "!@#$%^&*()-_=+\\/~?";
+	
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setPasswords(List<String> passwords) {
+		this.passwords = passwords;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public List<String> getPasswords() {
+		return passwords;
+	}
+
+	public String getUppercaseLetters() {
+		return UPPERCASE_LETTERS;
+	}
+
+	public String getLowercaseLetters() {
+		return LOWERCASE_LETTERS;
+	}
+
+	public String getNumbers() {
+		return NUMBERS;
+	}
+
+	public String getSymbols() {
+		return SYMBOLS;
+	}
+
+}

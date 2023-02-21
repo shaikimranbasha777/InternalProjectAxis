@@ -1,0 +1,16 @@
+package com.axis.service;
+
+import org.springframework.stereotype.Service;
+
+import com.axis.entity.Customer;
+
+@Service
+public class CustomerServiceImple implements CustomerService {
+
+	@Override
+	public String generatePassword(Customer customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

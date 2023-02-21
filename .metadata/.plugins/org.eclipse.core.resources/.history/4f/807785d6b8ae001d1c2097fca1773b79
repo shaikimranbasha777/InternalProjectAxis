@@ -1,0 +1,54 @@
+package com.axis.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.axis.entity.Alphabet;
+import com.axis.entity.Customer;
+import com.axis.repository.CustomerRepository;
+
+@Service
+public class CustomerServiceImple implements CustomerService {
+
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	Alphabet alphabet;
+	
+	
+	
+	@SuppressWarnings("null")
+	@Override
+	public StringBuilder generatePassword(Customer customer) {
+		
+		StringBuilder pass = new StringBuilder("");
+		
+		StringBuilder pool = new StringBuilder();
+		
+		if(customer.getIsUpperCaseInclude()) pool.append(alphabet.getUppercaseLetters());
+		
+		if(customer.getIsLowerCaseInclude()) pool.append(alphabet.getLowercaseLetters());
+		
+		if(customer.getIsNumbersInclude()) pool.append(alphabet.getNumbers());
+		
+		if(customer.getIsSpecialCharectersInclude()) pool.append(alphabet.getSymbols());
+		
+		public String getAlphabet() {
+			return pool.toString();
+		}
+		
+		int alphabetLength = alphabet.getAlphabet().length();
+		
+		 int max = alphabetLength - 1;
+	     int min = 0;
+	     int range = max - min + 1;
+		
+		for(int i=0;i<customer.getPasswordLength();i++) {
+			int index = (int) (Math.random() * range) + min;
+            pass.append(alphabet.getAlphabet().charAt(index));
+		}
+		
+		return pass;
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.axis.entity;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "customer_details")
+public class Customer {
+
+	private int id;
+	private Boolean isUpperCaseInclude;
+	private Boolean isLowerCaseInclude;
+}

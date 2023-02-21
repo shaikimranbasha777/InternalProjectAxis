@@ -1,0 +1,10 @@
+package com.axis.entity;
+
+public class UserDetails {
+	
+	private int id;
+	private String fullName;
+	private String email;
+	private String password;
+	
+}

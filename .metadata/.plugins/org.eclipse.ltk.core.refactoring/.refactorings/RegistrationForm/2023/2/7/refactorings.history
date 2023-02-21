@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.axis.RegistrationForm&apos; to &apos;com.axis&apos;&#x0D;&#x0A;- Original project: &apos;RegistrationForm&apos;&#x0D;&#x0A;- Original element: &apos;RegistrationForm/src/main/java/com.axis.RegistrationForm&apos;&#x0D;&#x0A;- Renamed element: &apos;RegistrationForm/src/main/java/com.axis&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.axis.RegistrationForm&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.axis.RegistrationForm" name="com.axis" qualified="false" references="true" stamp="1676617494426" textual="false" version="1.0"/>
+</session>
