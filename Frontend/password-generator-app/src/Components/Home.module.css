@@ -1,0 +1,24 @@
+.card{
+    box-shadow: 5px 5px 3px rgb(179, 178, 178);
+    border-radius: 15px;
+    padding: 20px;
+    width: 50%;
+    margin-bottom: 20px;
+    background-color: bisque;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*background-image: url("C:\Users\Imran\Downloads\data-protection-law-illustration-concept\3198965.jpg");*/
+    padding: 20px;
+    height: 80vh;
+    background-size: cover;
+}
+
+.home a{
+    text-decoration: none;
+    color: black;
+}

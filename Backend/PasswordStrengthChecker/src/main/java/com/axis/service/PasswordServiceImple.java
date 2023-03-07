@@ -1,5 +1,8 @@
 package com.axis.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.axis.entity.Password;
@@ -34,6 +37,7 @@ public class PasswordServiceImple implements PasswordService{
         return val;
     }
 	
+	private List<Integer> scores;
 	
 	@Override
 	public int passwordStrength(Password password) {
@@ -62,8 +66,19 @@ public class PasswordServiceImple implements PasswordService{
 
         if (s.length() >= 8) Score += 10;
         if (s.length() >= 16) Score += 10;
+        
+        scores = new ArrayList<>();
+        scores.add(Score);
 
         return Score;
 	}
+
+	@Override
+	public List<Integer> getScore() {
+		// TODO Auto-generated method stub
+		return scores;
+	}
+	
+	
 
 }

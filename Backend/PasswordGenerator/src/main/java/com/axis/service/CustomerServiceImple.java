@@ -1,9 +1,15 @@
 package com.axis.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.axis.entity.Customer;
+import com.axis.repository.CustomerRepository;
+
 
 
 @Service
@@ -13,6 +19,12 @@ public class CustomerServiceImple implements CustomerService {
 	public final String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
 	public final String NUMBERS = "1234567890";
 	public final String SYMBOLS = "!@#$%^&*()-_=+\\/~?";
+	
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	private List<StringBuilder> passwords = new ArrayList<>();
+	//sStringBuilder pass = new StringBuilder("");
 	
 	@Override
 	public StringBuilder generatePassword(Customer customer) {
@@ -42,7 +54,17 @@ public class CustomerServiceImple implements CustomerService {
             pass.append(str.charAt(index));
 		}
 		
+		
+		//passwords = new ArrayList<>();
+		passwords.add(pass);
+		
 		return pass;
+	}
+
+	@Override
+	public List<StringBuilder> getAllPasswords() {
+		
+		return passwords;
 	}
 
 }
