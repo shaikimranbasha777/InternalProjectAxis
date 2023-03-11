@@ -24,7 +24,7 @@ public class CustomerServiceImple implements CustomerService {
 	CustomerRepository customerRepository;
 	
 	private List<StringBuilder> passwords = new ArrayList<>();
-	//sStringBuilder pass = new StringBuilder("");
+	StringBuilder password;
 	
 	@Override
 	public StringBuilder generatePassword(Customer customer) {
@@ -55,8 +55,10 @@ public class CustomerServiceImple implements CustomerService {
 		}
 		
 		
-		//passwords = new ArrayList<>();
+		passwords = new ArrayList<>();
 		passwords.add(pass);
+		//password  = new StringBuilder("");
+		//password.append(pass);
 		
 		return pass;
 	}

@@ -2,9 +2,19 @@
     box-shadow: 5px 5px 3px rgb(179, 178, 178);
     border-radius: 15px;
     padding: 20px;
-    width: 50%;
+    width: 80%;
     margin-bottom: 20px;
     background-color: bisque;
+}
+
+.homeImg{
+    height: 60vh;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
 }
 
 .home{

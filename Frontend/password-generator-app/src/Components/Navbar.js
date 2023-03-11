@@ -1,11 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from './Navbar.module.css';
+import Cookies from 'js-cookie'
 
 function Navbar(){
+
+    const navigate = useNavigate();
+    const onClickLogout = () => {
+        Cookies.remove("jwt_token");
+        navigate('/login');
+    }
+
     return(
         <header className={classes.header}>
             <div className={classes.logo}>
-                Generate Strong Password
+                <Link to='/'><h2>Generate Strong Password</h2></Link>
             </div>
             <nav>
                 <ul>
@@ -17,6 +25,9 @@ function Navbar(){
                     </li>
                     <li>
                         <Link to='/checkstrength'>Check Strength</Link>
+                    </li>
+                    <li>
+                        <button type="button" onClick={onClickLogout}>Logout</button>
                     </li>
                 </ul>
             </nav>

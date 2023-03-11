@@ -9,9 +9,13 @@ spring:
         uri: http://localhost:8091/
         predicates:
         - Path=/generate/**
-        
        
       - id: PasswordStrengthChecker  #route identification
         uri: http://localhost:8092/
         predicates:
          - Path=/checkstrength/**
+      
+      - id: SecurityWithJWT  #route identification
+        uri: http://localhost:8093/
+        predicates:
+         - Path=/authentication/**

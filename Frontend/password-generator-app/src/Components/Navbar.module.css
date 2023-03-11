@@ -8,10 +8,8 @@
 }
  
 .logo {
-    font-size: 2rem;
     color:white;
     font-weight: bold;
-
 }
  
 .header ul {
@@ -35,4 +33,22 @@
 .header a:hover,
 .header a:active {
     color: rgb(231, 147, 108);
+}
+
+.header button{
+    background-color: transparent;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    text-align: center;
+    color: white;
+    border: solid 3px white;
+    font-size: 1rem;
+}
+
+.header button:hover,
+.header button:active{
+    background-color: white;
+    color: rgb(106, 106, 243);
+    border: solid 3px rgb(106, 106, 243);
 }

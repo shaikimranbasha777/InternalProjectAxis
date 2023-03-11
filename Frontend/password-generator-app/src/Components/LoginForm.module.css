@@ -1,3 +1,18 @@
+body{
+  height: 100vh;
+}
+
+.loginImg{
+  height: 50vh;
+}
+.container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60vh;
+  padding: 70px;
+}
+
 .form {
     padding: 1rem;
   }
@@ -29,6 +44,7 @@
   .actions {
     margin-top: 1rem;
     text-align: center;
+    margin-bottom: 20px;
   }
  
   .actions button {
@@ -48,14 +64,17 @@
     background-color: #705aed;
     border-color: #203bc5;
   }
- 
   .item{
-      margin: 1rem 0;
       border: 1px;
       box-shadow:  3px 3px 3px rgb(161, 160, 160);
       background-color: rgb(243, 249, 249);
       width: 40%;
-      margin-left: auto;
-      margin-right: auto;
       border-radius: 10px;
+      padding-bottom: 20px;
+      padding-top: 20px;
+      height: 50vh;
+  }
+
+  .form a{
+    text-decoration: none;
   }

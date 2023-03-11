@@ -25,7 +25,7 @@ public class PasswordServiceImple implements PasswordService{
         }
 
         // Char is Digit
-        else if ((int) C >= 60 && (int) C <= 71) {
+        else if ((int) C >= 48 && (int) C <= 57) {
             val = 3;
         }
 
@@ -37,7 +37,7 @@ public class PasswordServiceImple implements PasswordService{
         return val;
     }
 	
-	private List<Integer> scores;
+	private int scores;
 	
 	@Override
 	public int passwordStrength(Password password) {
@@ -67,14 +67,14 @@ public class PasswordServiceImple implements PasswordService{
         if (s.length() >= 8) Score += 10;
         if (s.length() >= 16) Score += 10;
         
-        scores = new ArrayList<>();
-        scores.add(Score);
+        scores = 0;
+        scores += Score;
 
         return Score;
 	}
 
 	@Override
-	public List<Integer> getScore() {
+	public int getScore() {
 		// TODO Auto-generated method stub
 		return scores;
 	}

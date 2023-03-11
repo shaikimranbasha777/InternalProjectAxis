@@ -29,8 +29,8 @@ public class PasswordStrengthController {
 	}
 	
 	@GetMapping("/getscore")
-	ResponseEntity<List<Integer>> getScores(){
-		return new ResponseEntity<List<Integer>>(passwordService.getScore(), HttpStatus.OK);
+	ResponseEntity<Integer> getScores(){
+		return new ResponseEntity<Integer>(passwordService.getScore(), HttpStatus.OK);
 	}
 	
 }
