@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classes from './LoginForm.module.css';
 import Cookies from "js-cookie";
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default function LoginForm() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
     const navigate = useNavigate();
 
@@ -15,12 +19,9 @@ export default function LoginForm() {
             expires: 30,
             path: '/',
         })
+        toast.success("Succsessfully logged in");
         navigate('/');
-    }
-
-    const onSubmitFailure = errorMsg => {
-        console.log(errorMsg)
-        //this.setState({showSubmitError: true, errorMsg})
+        
     }
 
     const submitForm = async event => {
@@ -30,7 +31,7 @@ export default function LoginForm() {
             password
         }
 
-        const url = "http://localhost:8093/authentication/login";
+        const url = "http://localhost:8090/authentication/login";
         const options = {
             method: "POST",
             body: JSON.stringify(userDetails),
@@ -44,10 +45,17 @@ export default function LoginForm() {
         if (response.ok === true) {
             onSubmitSuccess(data.token);
             console.log(data.token);
+            
         } else {
-            onSubmitFailure(data.error_msg);
-            console.log("fail");
+            toast.error("Failed to login");
+            setErrorMsg("*username and password incorrect");
         }
+    }
+
+    const clearContents = () => {
+        setUsername("");
+        setPassword("");
+        setErrorMsg("");
     }
 
     return (
@@ -60,15 +68,17 @@ export default function LoginForm() {
                 <form onSubmit={submitForm} className={classes.form}>
                     <div className={classes.control}>
                         <label>Username</label>
-                        <input type='text' required id="username" placeholder='Enter your username' onChange={e => setUsername(e.target.value)} />
+                        <input type='text' required id="username" value={username} placeholder='Enter your username' onChange={e => setUsername(e.target.value)} />
                     </div>
                     <div className={classes.control}>
                         <label>Password</label>
-                        <input type='password' required id="password" placeholder='Enter your password' onChange={e => setPassword(e.target.value)} />
+                        <input type='password' required id="password" value={password} placeholder='Enter your password' onChange={e => setPassword(e.target.value)} />
                     </div>
+                    <ToastContainer/>
+                    <p>{errorMsg}</p>
                     <div className={classes.actions}>
                         <button type='submit'>Login</button>
-                        <button>Clear</button>
+                        <button type='button' onClick={clearContents}>Clear</button>
                     </div>
                     <div>
                         <Link to='/registration'> If you not registered please register here</Link>

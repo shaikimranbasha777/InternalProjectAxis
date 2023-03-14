@@ -75,6 +75,11 @@ body{
       height: 50vh;
   }
 
+  .item p{
+    color: red;
+    font-size: 15px;
+  }
+
   .form a{
     text-decoration: none;
   }

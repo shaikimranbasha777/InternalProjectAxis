@@ -9,7 +9,7 @@ function Home() {
     const navigate = useNavigate();
 
     const jwtToken = Cookies.get('jwt_token')
-    console.log(jwtToken);
+    //console.log(jwtToken);
     useEffect(() => {
         if (jwtToken === undefined) {
             navigate("/login");

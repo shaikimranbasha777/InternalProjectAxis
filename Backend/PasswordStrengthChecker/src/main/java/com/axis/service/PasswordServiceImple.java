@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.axis.entity.Password;
 
+
+
+
 @Service
 public class PasswordServiceImple implements PasswordService{
 
-	
 	
 	public int CharType(char C) {
         int val;
@@ -37,7 +39,7 @@ public class PasswordServiceImple implements PasswordService{
         return val;
     }
 	
-	private int scores;
+	private List<Integer> scores;
 	
 	@Override
 	public int passwordStrength(Password password) {
@@ -67,14 +69,14 @@ public class PasswordServiceImple implements PasswordService{
         if (s.length() >= 8) Score += 10;
         if (s.length() >= 16) Score += 10;
         
-        scores = 0;
-        scores += Score;
+        scores = new ArrayList<>();
+        scores.add(Score);
 
         return Score;
 	}
 
 	@Override
-	public int getScore() {
+	public List<Integer> getScore() {
 		// TODO Auto-generated method stub
 		return scores;
 	}

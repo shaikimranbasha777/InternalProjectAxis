@@ -55,7 +55,7 @@ public class CustomerServiceImple implements CustomerService {
 		}
 		
 		
-		passwords = new ArrayList<>();
+		//passwords = new ArrayList<>();
 		passwords.add(pass);
 		//password  = new StringBuilder("");
 		//password.append(pass);

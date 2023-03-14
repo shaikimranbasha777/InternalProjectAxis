@@ -10,7 +10,7 @@ function PasswordStrength() {
     const navigate = useNavigate();
 
     const jwtToken = Cookies.get('jwt_token')
-    console.log(jwtToken);
+    //console.log(jwtToken);
     useEffect(() => {
         if (jwtToken === undefined) {
             navigate("/login");
@@ -19,17 +19,17 @@ function PasswordStrength() {
     })
 
     const [password, setPassword] = useState('');
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState([]);
     const [message, setMessage] = useState('');
     const [scoreStyle, setScoreStyle] = useState('');
     const [renderScoreContainer, setRender] = useState(false);
-
+    const [errorMsg, setErrorMsg] = useState('');
 
     const checkStregth = () => {
         let inputPassword = {
             password
         }
-        fetch('http://localhost:8092/checkstrength/password', {
+        fetch('http://localhost:8090/checkstrength/password', {
             method: "POST",
             body: JSON.stringify(inputPassword),
             headers: {
@@ -38,19 +38,24 @@ function PasswordStrength() {
             }
         }).then(response => {
             console.log(response.data);
-            setScore(response.data);
+            //setScore(response.data);
         })
             .catch(err => console.log(err));
 
-        Axios.get('http://localhost:8092/checkstrength/getscore')
+        Axios.get('http://localhost:8090/checkstrength/getscore')
             .then(res => {
                 console.log(res.data);
                 setScore(res.data);
-                renderScore(res.data);
+                renderScore(res.data[0]);
             }).catch(err => console.log(err));
 
-        //clearContents();
-        setRender(true);
+        if(password === ''){
+            setErrorMsg("* Please Enter Password");
+            setRender(false);
+        }else{
+            setRender(true);
+        }
+
         //clearContents();
     }
 
@@ -78,6 +83,8 @@ function PasswordStrength() {
     const clearContents = () => {
         setPassword("");
         setRender(false);
+        setErrorMsg('');
+        setScore([]);
     }
 
 
@@ -89,6 +96,7 @@ function PasswordStrength() {
                     <div className={classes.control}>
                         <label>Password </label>
                         <input type='text' required id="password" placeholder="Enter Your Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <p>{errorMsg}</p>
                     </div>
                     <div className={classes.actions}>
                         <button type="submit" onClick={checkStregth}>Check Strength</button>

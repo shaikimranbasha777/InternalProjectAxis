@@ -4,18 +4,19 @@ import Axios from 'axios';
 import classes from './PasswordGenerator.module.css';
 import Navbar from "./Navbar";
 import Cookies from "js-cookie";
+import copy from "copy-to-clipboard";
 
 export default function PasswordGenerator() {
 
     const navigate = useNavigate();
 
     const jwtToken = Cookies.get('jwt_token')
-    console.log(jwtToken);
+    //console.log(jwtToken);
     useEffect(() => {
         if (jwtToken === undefined) {
             navigate("/login");
         }
-        
+
     })
 
     const [upper, setUpper] = useState(false);
@@ -25,6 +26,8 @@ export default function PasswordGenerator() {
     const [length, setLength] = useState(0);
 
     const [data, setData] = useState([]);
+    const [showPassword, setShowPassword] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     /*const [score, setScore] = useState(0);
     const [message, setMessage] = useState('');
@@ -41,8 +44,7 @@ export default function PasswordGenerator() {
             passwordLength: length
         }
 
-        fetch('http://localhost:8091/generate/password', {
-            //mode: "no-cors",
+        fetch('http://localhost:8090/generate/password', {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -50,10 +52,10 @@ export default function PasswordGenerator() {
                 "Accept": "application/json",
                 "Access-Control-Allow-Origin": "*"
             }
-        }).then(response => console.log(response.data))
-        .catch(err => console.log(err));
+        }).then(response => console.log(response))
+            .catch(err => console.log(err));
 
-        Axios.get('http://localhost:8091/generate/getAll')
+        Axios.get('http://localhost:8090/generate/getAll')
             .then(res => {
                 console.log(res.data)
                 setData(res.data)
@@ -62,6 +64,13 @@ export default function PasswordGenerator() {
 
         //checkStrength();
         //clearContents();
+        if(length === 0 || length === ''){
+            setErrorMsg("* Length Required");
+            setShowPassword(false);
+        }else{
+            setShowPassword(true);
+            setErrorMsg('');
+        }
     }
 
     /*const checkStrength = () => {
@@ -123,6 +132,13 @@ export default function PasswordGenerator() {
         setSymbol(false);
         setNumber(false);
         setLength(0);
+        setShowPassword(false);
+        setErrorMsg('');
+    }
+
+    const copyPaasword = () => {
+        copy(data[data.length -1]);
+        alert("Copied " + data[data.length -1]);
     }
 
     return (
@@ -135,30 +151,33 @@ export default function PasswordGenerator() {
                 <div>
                     {/* <h2 className={classes.generatorHeading}>Generate Strong Password</h2> */}
                     <div className={classes.checkboxContainer}>
-                        <div>
-                            Upper Case Letters : <input type="checkbox" checked={upper} onChange={(e) => setUpper(e.target.checked)} />
+                        <div className={classes.inputContainer}>
+                            Upper Case Letters  &nbsp; : &nbsp;<input type="checkbox" checked={upper} onChange={(e) => setUpper(e.target.checked)} />
                         </div>
-                        <div>
-                            Lower Case Letters : <input type="checkbox" checked={lower} onChange={(e) => setLower(e.target.checked)} />
+                        <div className={classes.inputContainer}>
+                            Lower Case Letters &nbsp; : &nbsp;<input type="checkbox" checked={lower} onChange={(e) => setLower(e.target.checked)} />
                         </div>
-                        <div>
-                            Whole Numbers : <input type="checkbox" checked={number} onChange={(e) => setNumber(e.target.checked)} />
+                        <div className={classes.inputContainer}>
+                            Whole Numbers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type="checkbox" checked={number} onChange={(e) => setNumber(e.target.checked)} />
                         </div>
-                        <div>
-                            Special Charecters : <input type="checkbox" checked={symbol} onChange={(e) => setSymbol(e.target.checked)} />
+                        <div className={classes.inputContainer}>
+                            Special Charecter &nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type="checkbox" checked={symbol} onChange={(e) => setSymbol(e.target.checked)} />
                         </div>
-                        <div>
-                            Password length : <input type="number" value={length} onChange={(e) => setLength(e.target.value)} />
+                        <div className={classes.inputContainer}>
+                            Password length &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type="number" value={length} onChange={(e) => setLength(e.target.value)} />
                         </div>
+                        <p>{errorMsg}</p>
                         <div className={classes.actions}>
                             <button type="submit" onClick={generatePassword}>Generate</button>
                             <button onClick={clearContents}>Clear</button>
                         </div>
 
                     </div>
-                    <div className={classes.passwordContainer}>
-                        Your new password is : <p>{(data[data.length -1])}</p>
-                    </div>
+                    {showPassword &&
+                        <div className={classes.passwordContainer}>
+                            <p>{(data[data.length - 1])}</p>
+                            <button onClick={copyPaasword}>Copy</button>
+                        </div>}
                     {/*renderScoreContainer &&
                         <div className={classes.scoreContainer}>
                             <h3>You got <span className={scoreStyle}>{score}</span> score of your <span className={scoreStyle}>{data}</span></h3>

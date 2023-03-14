@@ -7,5 +7,5 @@ import com.axis.entity.Password;
 public interface PasswordService {
 	
 	int passwordStrength(Password password);
-	int getScore();
+	List<Integer> getScore();
 }
