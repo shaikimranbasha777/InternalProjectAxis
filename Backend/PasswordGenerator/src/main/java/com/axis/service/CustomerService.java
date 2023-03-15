@@ -1,12 +1,10 @@
 package com.axis.service;
 
-import java.util.List;
-
 import com.axis.entity.Customer;
+import com.axis.entity.ResponsePassword;
 
 public interface CustomerService {
 	
-	StringBuilder generatePassword(Customer customer);
-	List<StringBuilder> getAllPasswords();
+	ResponsePassword generatePassword(Customer customer);
 	
 }

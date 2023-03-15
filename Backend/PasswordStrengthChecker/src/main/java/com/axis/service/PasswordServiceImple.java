@@ -1,11 +1,11 @@
 package com.axis.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.axis.entity.Password;
+import com.axis.entity.ResponseScore;
+import com.axis.repository.ResponseScoreRepository;
 
 
 
@@ -39,10 +39,13 @@ public class PasswordServiceImple implements PasswordService{
         return val;
     }
 	
-	private List<Integer> scores;
+	@Autowired
+	ResponseScoreRepository scoreRepository;
+	
+	ResponseScore scores = new ResponseScore();
 	
 	@Override
-	public int passwordStrength(Password password) {
+	public ResponseScore passwordStrength(Password password) {
 		String s = password.getPassword();
         boolean UsedUpper = false;
         boolean UsedLower = false;
@@ -69,18 +72,9 @@ public class PasswordServiceImple implements PasswordService{
         if (s.length() >= 8) Score += 10;
         if (s.length() >= 16) Score += 10;
         
-        scores = new ArrayList<>();
-        scores.add(Score);
+        scores.setSocre(Score);
 
-        return Score;
+        return scoreRepository.save(scores);
 	}
-
-	@Override
-	public List<Integer> getScore() {
-		// TODO Auto-generated method stub
-		return scores;
-	}
-	
-	
 
 }

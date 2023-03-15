@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.axis.entity.Customer;
+import com.axis.entity.ResponsePassword;
 import com.axis.service.CustomerService;
 
 @CrossOrigin
@@ -25,13 +26,8 @@ public class CustomerController {
 	
 	
 	@PostMapping("/password")
-	ResponseEntity<StringBuilder> generatePassword(@RequestBody Customer customer){
-		return new ResponseEntity<StringBuilder>(customerService.generatePassword(customer), HttpStatus.OK);
-	}
-	
-	@GetMapping("/getAll")
-	ResponseEntity<List<StringBuilder>> getAllPaswords(){
-		return new ResponseEntity<List<StringBuilder>>(customerService.getAllPasswords(), HttpStatus.OK);
+	ResponseEntity<ResponsePassword> generatePassword(@RequestBody Customer customer){
+		return new ResponseEntity<ResponsePassword>(customerService.generatePassword(customer), HttpStatus.OK);
 	}
 	
 }

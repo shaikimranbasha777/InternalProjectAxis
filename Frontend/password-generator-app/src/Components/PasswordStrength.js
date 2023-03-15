@@ -1,6 +1,5 @@
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from 'axios';
 import classes from "./PasswordStrength.module.css";
 import Navbar from "./Navbar";
 import Cookies from "js-cookie";
@@ -10,7 +9,6 @@ function PasswordStrength() {
     const navigate = useNavigate();
 
     const jwtToken = Cookies.get('jwt_token')
-    //console.log(jwtToken);
     useEffect(() => {
         if (jwtToken === undefined) {
             navigate("/login");
@@ -19,35 +17,30 @@ function PasswordStrength() {
     })
 
     const [password, setPassword] = useState('');
-    const [score, setScore] = useState([]);
+    const [score, setScore] = useState('');
     const [message, setMessage] = useState('');
     const [scoreStyle, setScoreStyle] = useState('');
     const [renderScoreContainer, setRender] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
-    const checkStregth = () => {
+    const checkStregth = async (event) => {
+        event.preventDefault();
         let inputPassword = {
             password
         }
-        fetch('http://localhost:8090/checkstrength/password', {
+        
+        const response = await fetch('http://localhost:8090/checkstrength/password', {
             method: "POST",
             body: JSON.stringify(inputPassword),
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
             }
-        }).then(response => {
-            console.log(response.data);
-            //setScore(response.data);
         })
-            .catch(err => console.log(err));
-
-        Axios.get('http://localhost:8090/checkstrength/getscore')
-            .then(res => {
-                console.log(res.data);
-                setScore(res.data);
-                renderScore(res.data[0]);
-            }).catch(err => console.log(err));
+        const data = await response.json();
+        console.log(data.socre);
+        setScore(data.socre);
+        renderScore(data.socre);
 
         if(password === ''){
             setErrorMsg("* Please Enter Password");
@@ -84,7 +77,7 @@ function PasswordStrength() {
         setPassword("");
         setRender(false);
         setErrorMsg('');
-        setScore([]);
+        setScore('');
     }
 
 

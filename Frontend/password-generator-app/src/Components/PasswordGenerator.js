@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Axios from 'axios';
+//import Axios from 'axios';
 import classes from './PasswordGenerator.module.css';
 import Navbar from "./Navbar";
 import Cookies from "js-cookie";
@@ -25,7 +25,7 @@ export default function PasswordGenerator() {
     const [symbol, setSymbol] = useState(false);
     const [length, setLength] = useState(0);
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -34,7 +34,8 @@ export default function PasswordGenerator() {
     const [scoreStyle, setScoreStyle] = useState('');
     const [renderScoreContainer, setRender] = useState(false);*/
 
-    const generatePassword = () => {
+    const generatePassword = async (event) => {
+        event.preventDefault();
 
         let data = {
             isUpperCaseInclude: upper,
@@ -44,7 +45,7 @@ export default function PasswordGenerator() {
             passwordLength: length
         }
 
-        fetch('http://localhost:8090/generate/password', {
+        const response = await fetch('http://localhost:8090/generate/password', {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -52,56 +53,44 @@ export default function PasswordGenerator() {
                 "Accept": "application/json",
                 "Access-Control-Allow-Origin": "*"
             }
-        }).then(response => console.log(response))
-            .catch(err => console.log(err));
+        })
 
-        Axios.get('http://localhost:8090/generate/getAll')
-            .then(res => {
-                console.log(res.data)
-                setData(res.data)
-            })
-            .catch(err => console.log(err));
+        const pass = await response.json()
+        console.log(pass.password)
+        setData(pass.password);
 
         //checkStrength();
         //clearContents();
-        if(length === 0 || length === ''){
+        if (length === 0 || length === '') {
             setErrorMsg("* Length Required");
             setShowPassword(false);
-        }else{
+           
+        } else {
             setShowPassword(true);
             setErrorMsg('');
         }
     }
 
-    /*const checkStrength = () => {
-        //const pass = data;
+    /*const checkStrength = async (event) => {
+        event.preventDefault();
         let inputPassword = {
-            password: data
+            password : data
         }
 
-        fetch('http://localhost:8092/checkstrength/password', {
+        const response = await fetch('http://localhost:8090/checkstrength/password', {
             method: "POST",
             body: JSON.stringify(inputPassword),
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
             }
-        }).then(response => {
-            console.log(response.data);
-            setScore(response.data);
-            renderScore(response.data);
         })
-            .catch(err => console.log(err));
-
-        Axios.get('http://localhost:8092/checkstrength/getscore')
-            .then(res => {
-                console.log(res.data);
-                setScore(res.data);
-                renderScore(res.data);
-            }).catch(err => console.log(err));
-
-        //clearContents();
+        const scoreRes = await response.json();
+        console.log(scoreRes.socre);
+        setScore(scoreRes.socre);
+        renderScore(scoreRes.socre);
         setRender(true);
+        //clearContents();
     }
 
     const renderScore = (score) => {
@@ -134,11 +123,12 @@ export default function PasswordGenerator() {
         setLength(0);
         setShowPassword(false);
         setErrorMsg('');
+        //setRender(false)
     }
 
     const copyPaasword = () => {
-        copy(data[data.length -1]);
-        alert("Copied " + data[data.length -1]);
+        copy(data);
+        alert("Copied " + data);
     }
 
     return (
@@ -175,7 +165,7 @@ export default function PasswordGenerator() {
                     </div>
                     {showPassword &&
                         <div className={classes.passwordContainer}>
-                            <p>{(data[data.length - 1])}</p>
+                            <p>{(data)}</p>
                             <button onClick={copyPaasword}>Copy</button>
                         </div>}
                     {/*renderScoreContainer &&
@@ -183,7 +173,7 @@ export default function PasswordGenerator() {
                             <h3>You got <span className={scoreStyle}>{score}</span> score of your <span className={scoreStyle}>{data}</span></h3>
                             <h4 className={scoreStyle}>{message}</h4>
                         </div>
-    */}
+                    */}
                 </div>
             </div>
         </>

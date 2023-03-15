@@ -1,11 +1,9 @@
 package com.axis.service;
 
-import java.util.List;
-
 import com.axis.entity.Password;
+import com.axis.entity.ResponseScore;
 
 public interface PasswordService {
 	
-	int passwordStrength(Password password);
-	List<Integer> getScore();
+	ResponseScore passwordStrength(Password password);
 }
