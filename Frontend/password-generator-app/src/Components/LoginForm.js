@@ -45,7 +45,6 @@ export default function LoginForm() {
         if (response.ok === true) {
             onSubmitSuccess(data.token);
             console.log(data.token);
-            
         } else {
             toast.error("Failed to login");
             setErrorMsg("*username and password incorrect");

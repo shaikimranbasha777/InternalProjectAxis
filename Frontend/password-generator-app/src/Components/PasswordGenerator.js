@@ -29,11 +29,6 @@ export default function PasswordGenerator() {
     const [showPassword, setShowPassword] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
-    /*const [score, setScore] = useState(0);
-    const [message, setMessage] = useState('');
-    const [scoreStyle, setScoreStyle] = useState('');
-    const [renderScoreContainer, setRender] = useState(false);*/
-
     const generatePassword = async (event) => {
         event.preventDefault();
 
@@ -59,7 +54,6 @@ export default function PasswordGenerator() {
         console.log(pass.password)
         setData(pass.password);
 
-        //checkStrength();
         //clearContents();
         if (length === 0 || length === '') {
             setErrorMsg("* Length Required");
@@ -71,48 +65,7 @@ export default function PasswordGenerator() {
         }
     }
 
-    /*const checkStrength = async (event) => {
-        event.preventDefault();
-        let inputPassword = {
-            password : data
-        }
-
-        const response = await fetch('http://localhost:8090/checkstrength/password', {
-            method: "POST",
-            body: JSON.stringify(inputPassword),
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            }
-        })
-        const scoreRes = await response.json();
-        console.log(scoreRes.socre);
-        setScore(scoreRes.socre);
-        renderScore(scoreRes.socre);
-        setRender(true);
-        //clearContents();
-    }
-
-    const renderScore = (score) => {
-        if (score === 20 || score === 30) {
-            setMessage("Your Password is worst it can esaily crack it");
-            setScoreStyle(classes.score30);
-        } else if (score === 40 || score === 50) {
-            setMessage("Your Password is very waek it can esaily crack it");
-            setScoreStyle(classes.score50);
-        } else if (score === 60 || score === 70) {
-            setMessage("Your Password is weak it can esaily crack it");
-            setScoreStyle(classes.score70);
-        } else if (score === 80 || score === 90) {
-            setMessage("Your Password is best it is dificult to crack it");
-            setScoreStyle(classes.score90);
-        } else if (score === 100) {
-            setMessage("Your Password is strong it is dificult to crack it");
-            setScoreStyle(classes.score100);
-        } else {
-            setMessage('');
-        }
-    }*/
+    
 
 
     const clearContents = () => {
@@ -123,7 +76,6 @@ export default function PasswordGenerator() {
         setLength(0);
         setShowPassword(false);
         setErrorMsg('');
-        //setRender(false)
     }
 
     const copyPaasword = () => {
@@ -139,7 +91,6 @@ export default function PasswordGenerator() {
                     <img src="https://img.freepik.com/free-photo/business-people-holding-golden-key_53876-74779.jpg" alt="generator" className={classes.homeImg} />
                 </div>
                 <div>
-                    {/* <h2 className={classes.generatorHeading}>Generate Strong Password</h2> */}
                     <div className={classes.checkboxContainer}>
                         <div className={classes.inputContainer}>
                             Upper Case Letters  &nbsp; : &nbsp;<input type="checkbox" checked={upper} onChange={(e) => setUpper(e.target.checked)} />
@@ -168,12 +119,6 @@ export default function PasswordGenerator() {
                             <p>{(data)}</p>
                             <button onClick={copyPaasword}>Copy</button>
                         </div>}
-                    {/*renderScoreContainer &&
-                        <div className={classes.scoreContainer}>
-                            <h3>You got <span className={scoreStyle}>{score}</span> score of your <span className={scoreStyle}>{data}</span></h3>
-                            <h4 className={scoreStyle}>{message}</h4>
-                        </div>
-                    */}
                 </div>
             </div>
         </>

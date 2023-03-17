@@ -36,4 +36,18 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public UserDto(String fullName, String email, Long number, String username, String password) {
+		super();
+		this.fullName = fullName;
+		this.email = email;
+		this.number = number;
+		this.username = username;
+		this.password = password;
+	}
+
+	public UserDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
